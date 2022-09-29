@@ -14,17 +14,20 @@ import java.sql.*;
 public class HelloController {
 
     @FXML
-    private TableView myTable;
+    private TableView<Product> myTable;
+    @FXML
+    private TableColumn<Product, Integer> productId;
+    @FXML
+    private TableColumn<Product, String> productName;
+    @FXML
+    private TableColumn<Product, Integer> productAmount;
+
 
     @FXML
     private void initialize() {
-/*        TableColumn nameColumn = new TableColumn("Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        TableColumn amountColumn = new TableColumn("Amount");
-        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-
-        myTable.getColumns().addAll(nameColumn, amountColumn);*/
+        productId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     }
 
     @FXML
@@ -64,10 +67,13 @@ public class HelloController {
             e.printStackTrace();
         }
 
-        for (Product product : rowList) {
-            myTable.getItems().add(product);
-        }
+        // Добавляем данные в таблицу
+        myTable.getItems().setAll(rowList);
 
+        // Вариант добавления через цикл
+/*        for (Product product : rowList) {
+            myTable.getItems().add(product);
+        }*/
     }
 
 }

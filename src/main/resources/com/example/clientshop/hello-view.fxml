@@ -4,14 +4,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientshop.HelloController">
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientshop.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <TableView fx:id="myTable">
      <columns>
-       <TableColumn fx:id="name" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="600.0" text="Название товара" />
-       <TableColumn fx:id="amount" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" text="Остаток" />
+       <TableColumn fx:id="productId" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" text="ID" />
+       <TableColumn fx:id="productName" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="350.0" text="Название товара" />
+       <TableColumn fx:id="productAmount" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" text="Остаток" />
      </columns>
    </TableView>
     <Button onAction="#onHelloButtonClick" text="Загрузить данные" />
