@@ -38,11 +38,11 @@ public class HelloController {
 
         try {
             // URL, где база находится и имя базы
-            String DB_URL = "jdbc:mysql://localhost:3306/test";
+            String DB_URL = "jdbc:mysql://localhost:3306/shop";
             // Имя пользователя
-            String USER = "root";
+            String USER = "user";
             // Пароль
-            String PASS = "20122012";
+            String PASS = "12345678";
             // Драйвер для подключения к БД
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Наше подключение
