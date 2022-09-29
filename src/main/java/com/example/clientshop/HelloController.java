@@ -4,7 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
@@ -15,17 +17,29 @@ public class HelloController {
     private TableView myTable;
 
     @FXML
+    private void initialize() {
+/*        TableColumn nameColumn = new TableColumn("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn amountColumn = new TableColumn("Amount");
+        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+        myTable.getColumns().addAll(nameColumn, amountColumn);*/
+    }
+
+    @FXML
     protected void onHelloButtonClick() {
         System.out.println("Была нажата кнопка ЗАГРУЗИТЬ");
 
-        // URL, где база находится и имя базы
-        String DB_URL = "jdbc:mysql://localhost:3306/test";
-        // Имя пользователя
-        String USER = "root";
-        // Пароль
-        String PASS = "20122012";
+        ObservableList<Product> rowList = FXCollections.observableArrayList();
 
         try {
+            // URL, где база находится и имя базы
+            String DB_URL = "jdbc:mysql://localhost:3306/test";
+            // Имя пользователя
+            String USER = "root";
+            // Пароль
+            String PASS = "20122012";
             // Драйвер для подключения к БД
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Наше подключение
@@ -38,11 +52,11 @@ public class HelloController {
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println(rs.getString("id"));
-                System.out.println(rs.getString("name"));
-                System.out.println(rs.getString("amount"));
+                Product product = new Product(rs.getInt("id"),
+                        rs.getString("name"), rs.getInt("amount"));
+                rowList.add(product);
             }
-
+            System.out.println(rowList.size());
         } catch (SQLException e) {
             // CATCH SOMETHING
             System.out.println(e);
@@ -50,29 +64,10 @@ public class HelloController {
             e.printStackTrace();
         }
 
-/*
+        for (Product product : rowList) {
+            myTable.getItems().add(product);
+        }
 
-
-        try {
-            Class.forName(driver);
-
-            rs = st.executeQuery(recordQuery);
-            while (rs.next()) {
-                ObservableList row = FXCollections.observableArrayList();
-
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    row.add(rs.getString(i));
-                    System.out.println(row);
-                }
-
-                data.add(row);
-
-            }
-            lovelyStudents.setItems(data);
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            // CATCH SOMETHING
-        }*/
     }
 
 }

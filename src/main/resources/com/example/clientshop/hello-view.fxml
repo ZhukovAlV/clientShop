@@ -10,8 +10,8 @@
     </padding>
    <TableView fx:id="myTable">
      <columns>
-       <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="600.0" text="Название товара" />
-       <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" text="Остаток" />
+       <TableColumn fx:id="name" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="600.0" text="Название товара" />
+       <TableColumn fx:id="amount" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" text="Остаток" />
      </columns>
    </TableView>
     <Button onAction="#onHelloButtonClick" text="Загрузить данные" />
