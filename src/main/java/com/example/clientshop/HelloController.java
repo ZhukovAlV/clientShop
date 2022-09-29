@@ -6,18 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 
 public class HelloController {
-
-    static String JDBC_DRIVER = "org.h2.Driver";
-    static String DB_URL = "jdbc:h2:file:C:/WAKILI/WAKILIdb";
-
-    //  Database credentials
-    static final String USER = "sa";
-    static final String PASS = "";
-
-    public static Connection conn = null;
 
     @FXML
     private TableView myTable;
@@ -25,16 +17,44 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick() {
         System.out.println("Была нажата кнопка ЗАГРУЗИТЬ");
+
+        // URL, где база находится и имя базы
+        String DB_URL = "jdbc:mysql://localhost:3306/test";
+        // Имя пользователя
+        String USER = "root";
+        // Пароль
+        String PASS = "20122012";
+
+        try {
+            // Драйвер для подключения к БД
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Наше подключение
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            // Наш запрос
+            String query = "SELECT * FROM product;";
+            // Создаем заявку для нашего запроса (сеанс)
+            Statement st = conn.createStatement();
+            // Выполняем запрос и записываем результат в ResultSet
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println(rs.getString("id"));
+                System.out.println(rs.getString("name"));
+                System.out.println(rs.getString("amount"));
+            }
+
+        } catch (SQLException e) {
+            // CATCH SOMETHING
+            System.out.println(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 /*
-        Statement st = null;
-        ResultSet rs;
-        String driver = "org.h2.Driver";
+
 
         try {
             Class.forName(driver);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            st = conn.createStatement();
-            String recordQuery = ("SELECT id, KIWI FROM KIWI");
 
             rs = st.executeQuery(recordQuery);
             while (rs.next()) {
