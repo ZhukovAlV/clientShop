@@ -128,10 +128,24 @@ public class HelloController {
     }
 
     @FXML
-    protected void onEditButtonClick() {
+    protected void onEditButtonClick() throws IOException {
         System.out.println("Была нажата кнопка Редактировать");
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("update-view.fxml"));
+        Parent parent = loader.load();
 
+        // Передаем данные полей продукта в новую сцену
+        UpdateController controller = loader.getController();
+        controller.preloadData(selectedProduct);
+
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Обновить товар");
+
+        stage.showAndWait();
+
+        onLoadButtonClick();
     }
 
     @FXML
