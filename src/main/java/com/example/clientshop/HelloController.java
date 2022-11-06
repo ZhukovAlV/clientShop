@@ -3,11 +3,15 @@ package com.example.clientshop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.sql.*;
 
@@ -22,12 +26,18 @@ public class HelloController {
     @FXML
     private TableColumn<Product, Integer> productAmount;
 
+    @FXML
+    private Button insertButton;
+
 
     @FXML
     private void initialize() {
         productId.setCellValueFactory(new PropertyValueFactory<>("id"));
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+
+        insertButton.setDisable(true);
     }
 
     @FXML
@@ -77,5 +87,44 @@ public class HelloController {
 /*        for (Product product : rowList) {
             myTable.getItems().add(product);
         }*/
+
+        // Делаем видимой кнопку Edit
+        insertButton.setDisable(false);
+    }
+
+
+    @FXML
+    protected void clickInsertButton() {
+        System.out.println("Была нажата кнопка Insert");
+
+        // Parent parent = FXMLLoader.load(getClass().getResource("insert-view.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("insert-view.fxml"));
+            Parent parent = loader.load();
+
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Создать новый товар");
+
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    protected void clickEditButton() {
+        System.out.println("Была нажата кнопка Edit");
+
+
+    }
+
+    @FXML
+    protected void clickDeleteButton() {
+        System.out.println("Была нажата кнопка Delete");
+
+
     }
 }
