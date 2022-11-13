@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.clientshop.HelloController">
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientshop.HelloController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <TableView fx:id="myTable">
+        <columns>
+            <TableColumn fx:id="productId" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="productName" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="350.0" text="Название товара" />
+            <TableColumn fx:id="productAmount" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" text="Остаток" />
+        </columns>
+    </TableView>
+    <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="200.0">
+        <children>
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Удалить">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin></Button>
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditButtonClick" text="Редактировать">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin></Button>
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onInsertButtonClick" text="Добавить">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin></Button>
+            <Button onAction="#onLoadButtonClick" text="Загрузить" />
+        </children>
+    </HBox>
 </VBox>
